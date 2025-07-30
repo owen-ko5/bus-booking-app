@@ -1,17 +1,8 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
-  const navigate = useNavigate();
-
-  const token = localStorage.getItem("token"); // Adjust if using Redux
-  // Removed role since it's not used
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("role");
-    navigate("/login");
-  };
+  const token = localStorage.getItem("token");
 
   return (
     <nav className="bg-white bg-opacity-80 backdrop-blur-md shadow-lg py-4 px-8 flex justify-between items-center sticky top-0 z-50 animate-fade-in">
@@ -41,12 +32,12 @@ export default function Navbar() {
             >
               Bookings
             </Link>
-            <button
-              onClick={handleLogout}
-              className="relative text-red-500 font-semibold transition-all duration-300 hover:text-red-700 hover:scale-110 hover:tracking-widest"
+            <Link
+              to="/profile"
+              className="relative text-gray-700 font-semibold transition-all duration-300 hover:text-blue-600 hover:scale-110 hover:tracking-widest"
             >
-              Logout
-            </button>
+              Profile
+            </Link>
           </>
         ) : (
           <>

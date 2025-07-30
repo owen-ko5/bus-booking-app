@@ -35,7 +35,7 @@ export default function BookingForm() {
     setSuccessMessage("");
 
     try {
-      const response = await axios.post("http://localhost:5000/bookings", formData);
+      const response = await axios.post("http://localhost:5500/bookings", formData);
       console.log("Booking submitted:", response.data);
       setSuccessMessage("✅ Booking info submitted!");
 

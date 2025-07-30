@@ -10,6 +10,7 @@ import Buses from "./pages/Buses";
 import Bookings from "./pages/Bookings";
 import BookingForm from "./components/BookingForm";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile"; // ✅ import Profile component
 
 export default function App() {
   const [buses, setBuses] = useState([
@@ -98,10 +99,14 @@ export default function App() {
             <Route
               path="/bookings"
               element={
-                <Bookings bookings={bookings} onCancel={handleCancelBooking} />
+                <Bookings
+                  bookings={bookings}
+                  onCancel={handleCancelBooking}
+                />
               }
             />
             <Route path="/bookingform" element={<BookingForm />} />
+            <Route path="/profile" element={<Profile />} /> {/* ✅ NEW ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

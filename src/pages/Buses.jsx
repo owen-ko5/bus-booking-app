@@ -7,8 +7,13 @@ export default function Buses() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5500/api/buses/") // 🔍 check this port & path!
-      .then((res) => res.json())
+    fetch("http://localhost:5500/api/buses/") 
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to load buses");
+        }
+        return res.json();
+      })
       .then((data) => {
         setBuses(data);
         setLoading(false);
@@ -27,7 +32,7 @@ export default function Buses() {
       return;
     }
 
-    fetch("http://localhost:5500/api/bookings", {
+    fetch("http://localhost:5500/api/bookings/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,13 +41,22 @@ export default function Buses() {
       body: JSON.stringify({ bus_id: busId, seats }),
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Booking failed");
+        if (res.status === 401) {
+          alert("Session expired. Please log in again.");
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+          return null;
+        }
+        if (!res.ok) {
+          throw new Error("Booking failed");
+        }
         return res.json();
       })
       .then((data) => {
+        if (!data) return;
         alert(data.message || "Booking successful");
 
-        // Optionally update the seats left in state
+        
         setBuses((prev) =>
           prev.map((bus) =>
             bus.id === busId
@@ -63,11 +77,7 @@ export default function Buses() {
   return (
     <section className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {buses.map((bus) => (
-        <BusCard
-          key={bus.id}
-          bus={bus}
-          onBook={handleBook} // ✅ pass this
-        />
+        <BusCard key={bus.id} bus={bus} onBook={handleBook} />
       ))}
     </section>
   );

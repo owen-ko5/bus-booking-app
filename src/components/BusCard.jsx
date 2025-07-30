@@ -12,14 +12,17 @@ export default function BusCard({ bus, onBook }) {
     ? `http://localhost:5500${bus.image_url}`
     : "https://via.placeholder.com/300x200?text=No+Image";
 
+  const availableSeats = Number(bus.seats ?? 0);
+  const price = Number(bus.price ?? 0);
+
   const handleBookClick = () => {
-    if (bus.availableSeats === 0) {
+    if (availableSeats === 0) {
       alert("Sorry, no seats available.");
       return;
     }
 
     const seatsInput = prompt(
-      `How many seats do you want to book? (Available: ${bus.availableSeats})`,
+      `How many seats do you want to book? (Available: ${availableSeats})`,
       "1"
     );
 
@@ -30,7 +33,7 @@ export default function BusCard({ bus, onBook }) {
       return;
     }
 
-    if (seats > bus.availableSeats) {
+    if (seats > availableSeats) {
       alert("❌ Not enough seats available.");
       return;
     }
@@ -69,33 +72,31 @@ export default function BusCard({ bus, onBook }) {
           <p className="text-sm">
             <span className="font-medium">Price:</span>{" "}
             <span className="text-orange-800 font-semibold">
-              KES {bus.price || "N/A"}
+              KES {price.toLocaleString()}
             </span>
           </p>
           <p className="text-sm">
             <span className="font-medium">Seats Available:</span>{" "}
             <span
               className={`font-bold ${
-                bus.availableSeats === 0
-                  ? "text-red-600"
-                  : "text-green-700"
+                availableSeats === 0 ? "text-red-600" : "text-green-700"
               }`}
             >
-              {bus.availableSeats ?? 0}
+              {availableSeats}
             </span>
           </p>
         </div>
 
         <button
           onClick={handleBookClick}
-          disabled={bus.availableSeats === 0}
+          disabled={availableSeats === 0}
           className={`w-full mt-3 px-4 py-2 rounded-lg font-semibold text-sm transition duration-300 ${
-            bus.availableSeats === 0
+            availableSeats === 0
               ? "bg-gray-400 cursor-not-allowed"
               : "bg-orange-600 hover:bg-orange-700 text-white shadow-sm hover:shadow-md"
           }`}
         >
-          {bus.availableSeats === 0 ? "Fully Booked" : "Book Seat"}
+          {availableSeats === 0 ? "Fully Booked" : "Book Seat"}
         </button>
       </div>
     </div>

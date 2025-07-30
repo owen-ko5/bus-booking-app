@@ -18,16 +18,16 @@ export default function Login() {
       const res = await login(formData);
       console.log(res);
 
-      // Check if token exists in response (your backend returns token on success)
+      
       if (res.token) {
-        // Save token and user info in localStorage (for persistence)
+        
         localStorage.setItem("token", res.token);
         localStorage.setItem("user", JSON.stringify(res.user));
 
-        // Redirect to homepage or dashboard
+       
         navigate("/");
       } else {
-        // Show error message from backend or generic fallback
+        
         setError(res.error || res.message || "Login failed. Please try again.");
       }
     } catch (err) {
