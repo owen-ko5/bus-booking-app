@@ -79,7 +79,7 @@ return (
           <span className="font-medium">Seats Available:</span>{" "}
           <span
             className={`font-bold ${
-              availableSeats === 0 ? "text-red-600" : "text-green-700"
+              availableSeats === 0 ? "text-red-600" : "text-black-700"
             }`}
           >
             {availableSeats}
