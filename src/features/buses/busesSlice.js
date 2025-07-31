@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchBuses as fetchBusesApi } from "../../api";
 
-// Async thunk to fetch buses (replace with your real API call)
+
 export const fetchBuses = createAsyncThunk(
   "buses/fetchBuses",
   async (_, { rejectWithValue }) => {
@@ -17,7 +17,7 @@ export const fetchBuses = createAsyncThunk(
   }
 );
 
-// You can add other async thunks like addBus, updateBus, deleteBus here as needed
+
 
 const busesSlice = createSlice({
   name: "buses",
@@ -27,7 +27,7 @@ const busesSlice = createSlice({
     error: null,
   },
   reducers: {
-    // For example, update bus availability after a booking
+    
     decrementSeatAvailability(state, action) {
       const busId = action.payload;
       const bus = state.buses.find((b) => b.id === busId);
@@ -35,7 +35,7 @@ const busesSlice = createSlice({
         bus.availableSeats -= 1;
       }
     },
-    // Add more reducers if needed
+    
   },
   extraReducers: (builder) => {
     builder

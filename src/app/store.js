@@ -8,7 +8,7 @@ const store = configureStore({
     auth: authReducer,
     buses: busesReducer,
     bookings: bookingsReducer,
-    // Add other reducers here as needed
+   
   },
   // Optional: you can customize middleware or devTools here
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware(),

@@ -88,7 +88,7 @@ export default function Payment() {
             >
               <option value="mpesa">M-Pesa</option>
               <option value="hillpayroll">Hill Payroll</option>
-              {/* Add more if needed */}
+              
             </select>
           </label>
 

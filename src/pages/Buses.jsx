@@ -7,7 +7,7 @@ export default function Buses() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5500/api/buses/") 
+    fetch("http://localhost:5500/api/buses/")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to load buses");
@@ -56,11 +56,13 @@ export default function Buses() {
         if (!data) return;
         alert(data.message || "Booking successful");
 
-        
         setBuses((prev) =>
           prev.map((bus) =>
             bus.id === busId
-              ? { ...bus, availableSeats: Math.max(0, bus.availableSeats - seats) }
+              ? {
+                  ...bus,
+                  availableSeats: Math.max(0, bus.availableSeats - seats),
+                }
               : bus
           )
         );
@@ -71,14 +73,16 @@ export default function Buses() {
       });
   };
 
-  if (loading) return <p>Loading buses...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="text-white text-center mt-10">Loading buses...</p>;
+  if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
 
   return (
-    <section className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {buses.map((bus) => (
-        <BusCard key={bus.id} bus={bus} onBook={handleBook} />
-      ))}
-    </section>
+    <div className="min-h-screen bg-[#3b0764] py-10 px-4">
+      <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {buses.map((bus) => (
+          <BusCard key={bus.id} bus={bus} onBook={handleBook} />
+        ))}
+      </section>
+    </div>
   );
 }
