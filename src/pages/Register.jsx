@@ -7,7 +7,7 @@ import bgImage from "../assets/Matatu.jpg";
 export default function Register() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "", 
@@ -32,7 +32,6 @@ export default function Register() {
     e.preventDefault();
     setError(null);
 
-    
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -40,7 +39,6 @@ export default function Register() {
 
     setLoading(true);
     try {
-      
       const { confirmPassword, ...dataToSend } = formData;
 
       const res = await registerUser(dataToSend);
@@ -83,17 +81,17 @@ export default function Register() {
           <div className="mb-4 p-2 bg-red-100 text-red-700 rounded">{error}</div>
         )}
 
-        <label htmlFor="name" className="block mb-1 font-medium">
-          Name
+        <label htmlFor="username" className="block mb-1 font-medium">
+          Username
         </label>
         <input
-          id="name"
-          name="name"
+          id="username"
+          name="username"
           type="text"
-          placeholder="Your full name"
+          placeholder="Your username"
           required
           className="border p-3 w-full mb-4 rounded bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-purple-400"
-          value={formData.name}
+          value={formData.username}
           onChange={handleChange}
         />
 

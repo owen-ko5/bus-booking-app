@@ -71,7 +71,7 @@ return (
       <div className="space-y-1">
         <p className="text-sm">
           <span className="font-medium">Price:</span>{" "}
-          <span className="text-orange-800 font-semibold">
+          <span className="text-white-800 font-semibold">
             KES {price.toLocaleString()}
           </span>
         </p>
@@ -79,7 +79,7 @@ return (
           <span className="font-medium">Seats Available:</span>{" "}
           <span
             className={`font-bold ${
-              availableSeats === 0 ? "text-red-600" : "text-black-700"
+              availableSeats === 0 ? "text-black-600" : "text-black-700"
             }`}
           >
             {availableSeats}
